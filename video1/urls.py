@@ -1,5 +1,5 @@
 from rest_framework import routers
-from video.views import IndexViewSet
+from video1.views import IndexViewSet
 
 router = routers.SimpleRouter()
 router.register(r'a', IndexViewSet)

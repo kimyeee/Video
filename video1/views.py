@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 # Create your views here.
 from rest_framework import mixins, viewsets
 
-from video.models import Video
-from video.serializers import VideoSerializer
+from video1.models import Video
+from video1.serializers import VideoSerializer
+
+
+def index(request):
+    return HttpResponse('走错了')
 
 
 class IndexViewSet(mixins.CreateModelMixin,
