@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/home.css">
+</head>
+<body>
+<div class="head">
+    <div class="pg-header">
+
+        <div class="header-l">
+            <span class="bbs-name">老子的技术论坛</span>
+            {% if article_type_id %}
+                <a href="/all">全部</a>
+            {% else %}
+                <a href="/all" class="active">全部</a>
+            {% endif %}
+
+            {% for type in type_list %}
+                {% if article_type_id == type.0 %}
+                    <a class="active" href="/all/{{ type.0 }}.html">{{ type.1 }}</a>
+                {% else %}
+                    <a href="/all/{{ type.0 }}.html">{{ type.1 }}</a>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="header-r">
+            {% if msg.username == "not_login" %}
+                <span class="action-login">
+                <a href="/register.html"><i class="fa fa-registered" aria-hidden="true"></i> 注册</a>
+                <a href="/login.html"><i class="fa fa-user-o" aria-hidden="true"></i> 登录</a>
+
+                </span>
+            {% else %}
+                <span class="action-login">
+                <a href="">{{ msg.username }}</a>
+                    {% if msg.blog %}
+                        <a href="/{{ msg.blog_site }}.html"><i class="fa fa-user" aria-hidden="true"></i> 我的博客</a>
+                        <a href=""><i class="fa fa-cogs" aria-hidden="true"></i> 管理</a>
+                    {% else %}
+                        <a href="/register_blog/{{ msg.username }}.html"><i class="fa fa-file-text-o" aria-hidden="true"></i> 注册博客</a>
+
+                    {% endif %}
+
+                <a href="/exit/{{ msg.username }}"><i class="fa fa-sign-out" aria-hidden="true"></i> 退出</a>
+                </span>
+
+            {% endif %}
+
+
+        </div>
+
+    </div>
+</div>
+<div class="pg-body">
+
+    <div class="body">
+
+        <div class="body-l">
+            {% for article in article_list %}
+                <div class="popover-title title"><a href="">{{ article.title }}</a></div>
+                <div>
+                    <div class="avatar">
+                        <img src="{{ article.blog.user.avatar }}" alt="">
+                    </div>
+                    <div class="summary">
+                        <a href="">{{ article.summary }}</a>
+                    </div>
+                </div>
+                <div class="information">
+                    <a href=""><i class="fa fa-user-o" aria-hidden="true"></i>{{ article.blog.user.username }}
+                    </a>
+                    发布于
+                    {{ article.create_time|date:"Y-m-d H:i" }}
+                    <a href=""><i class="fa fa-eye" aria-hidden="true"></i>{{ article.read_count }}
+                    </a>
+                    <a href=""><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ article.comment_count }}
+                    </a>
+                    <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{ article.up_count }}
+                    </a>
+                    <a href=""><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{ article.down_count }}
+                    </a>
+                </div>
+            {% endfor %}
+
+
+        </div>
+        <div class="body-r">
+            <div class="body-r-top panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">吐血推荐</h3>
+                </div>
+                <div class="panel-body">
+                    test
+                </div>
+
+            </div>
+            <div class="body-r-bottom panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">评论最多</h3>
+                </div>
+                <div class="panel-body">
+                    {% for hot in hot_list %}
+                        <p><a href="">{{ hot.title }}</a></p>
+                    {% endfor %}
+
+                </div>
+
+            </div>
+        </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{ page_info.pager|safe }}
+            </ul>
+        </nav>
+    </div>
+
+</div>
+<script src="/static/jquery.js"></script>
+<script>
+
+</script>
+</body>
+</html>

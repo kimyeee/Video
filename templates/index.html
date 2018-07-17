@@ -9,10 +9,14 @@
 <div>
 </div>
 <br>
-<div>
-    <ul id="mm">
-        <li>1</li>
-    </ul>
+<div><div class="jumbotron">
+                    <h1>Hello, world!</h1>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                    </div>
+    <div id="mm">
+
+    </div>
 </div>
 <br>
 <div>
@@ -27,12 +31,16 @@
 <script>
     console.log(1);
     $.getJSON(
-        "http://192.168.1.169:8888/a/",
+        "http://192.168.1.4:8888/a/",
         function (data) {
             console.log(data.data.results);
             data = data.data.results;
             for (var i = 0; i < data.length; i++) {
-                $('#mm').appendChild('<li>1</li>')
+                $("#mm").append($('<div class="jumbotron">\n' +
+                    '  <h1>Hello, world!</h1>\n' +
+                    '  <p>...</p>\n' +
+                    '  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>\n' +
+                    '</div>'))
             }
         }
     )

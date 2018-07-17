@@ -1,0 +1,217 @@
+{% extends "mode2.html" %}
+{% block my_css %}
+    <link rel="stylesheet" href="/static/css/detail.css">
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="article_pg">
+
+
+        <h3><a href="/{{ user_obj.blog.site }}/article/{{ article.nid }}.html">{{ article.title }}</a></h3>
+
+        {{ article.articledetail.content|safe }}
+        <div class="popover-title title"></div>
+
+        <div class="information">
+
+            发布于
+            {{ article.create_time|date:"Y-m-d H:i" }}
+            <a href=""><i class="fa fa-eye" aria-hidden="true"></i>{{ article.read_count }}
+            </a>
+            <a href="#"><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ article.comment_count }}
+            </a>
+            <a id="up"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><span id="up_c">{{ article.up_count }}</span>
+            </a>
+            <a id="down"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i><span
+                    id="down_c">{{ article.down_count }}</span>
+            </a>
+            <span id="tip"></span>
+        </div>
+        <div class="comment_list">
+            {#            {% for comment in comment_list %}#}
+            {#                <p><a href="#">#{{ forloop.counter }}楼 </a> {{ comment.create_time|date:"Y-m-d H:i" }} <a#}
+            {#                        href="/{{ comment.user.blog.site }}.html">{{ comment.user.nickname }}</a></p>#}
+            {#                <p><span>{{ comment.content }}</span></p>#}
+            {#            {% endfor %}#}
+        </div>
+        <div>
+            <p id="re_back"></p>
+            <p><textarea id="comment" rows="9" wrap="hard" placeholder="添加评论"></textarea></p>
+            {% if request.session.username %}
+                <button id="comment_btn" class="btn btn-success" name="" onclick="comment();"> 评 论</button>
+                <button id="exit_btn" class="btn btn-warning" onclick="exit();"> 退 出</button>
+            {% else %}
+                <span class="action-login">已注册用户登录后才能发表评论，请<a href="/register.html"> 注 册 </a> 或
+                <a href="/login.html?url=/{{ user_obj.blog.site }}/article/{{ article.nid }}.html"> 登 录 </a>，访问<a
+                            href="/"> 首 页 </a>。
+                </span>
+            {% endif %}
+
+        </div>
+        <div class="comment2">
+
+        </div>
+        {#        <div class="comment2">#}
+        {#            {% load tz %}#}
+        {#            {% tree result %}#}
+        {##}
+        {##}
+        {#        </div>#}
+
+
+    </div>
+{% endblock %}
+
+{% block my_js %}
+    <script src="/static/jquery.js"></script>
+    <script>
+        f_count = 1;
+        function create(dic) {
+            var tag = $("<div class='comment'></div>");
+            var content = "<p><a href='javascript:void(0);'>#$1楼</a> $2  <a name='$3' href='/$4.html'>$5</a><span class='manage'>" +
+                " <a href='javascript:void(0);' onclick='quote(this);'> 引用 </a> " +
+                "| <a href='#re_back' onclick='reply(this);'> 回复 </a></span></p>" +
+                "<p class='content1'>$6</p>";
+
+            $.each(dic, function (i, item) {
+                var tpl = $("<div class='content'></div>");
+{#                console.log(item.create_time);#}
+                tpl.html(content.replace("$1", f_count).replace("$2", item.create_time).replace('$3', item.nid)
+                    .replace("$4", item.user__blog__site).replace("$5", item.user__nickname).replace("$6", item.content));
+
+                f_count++;
+                tag.append(tpl);
+                if (item.child) {
+                    var child_tag = create(item.child);
+                    tag.append(child_tag);
+                }
+
+            });
+            return tag
+        }
+
+
+        $(function () {
+            $.ajax({
+                url: "/get_comment.act",
+                type: "POST",
+                dataType: "JSON",
+                data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "article_id": "{{ article.nid }}"},
+                success: function (data) {
+                    {#                   alert(data);#}
+{#                    console.log(data);#}
+{#                    console.log(typeof(data));#}
+                    var target = create(data);
+                    $(".comment_list").append(target);
+                }
+            })
+        });
+
+
+        $("#up").click(function () {
+            updown("up");
+        });
+        $("#down").click(function () {
+            updown("down");
+        });
+
+        function exit() {
+            $.ajax({
+                url: "/exit/{{ request.session.username.username }}",
+                type: "GET",
+                data: {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                success: function (data) {
+                    location.reload()
+                }
+            })
+        }
+
+        function reply(ths) {
+            console.log($(ths).parent().prev().text());
+            var re_nickname = $(ths).parent().prev().text();
+            $("#re_back").text('@' + re_nickname);
+            $("#comment").focus();
+            $("#comment")[0].focus();
+{#            document.getElementById("comment").focus();#}
+
+            var re_nid = $(ths).parent().prev().prop("name");
+            $("#comment_btn").prop("name", re_nid)
+        }
+        function quote(ths) {
+            alert("还没写")
+        }
+{#"111".replace#}
+        function comment() {
+            var reply = "";
+            if ($("#re_back").text()) {
+                reply = "<p><a href='javascript:void(0);'>$1</a></p>".replace("$1", $("#re_back").text());
+            }
+            var comment = reply + $("#comment").val();
+            var reply_id = null;
+            reply_id = $("#comment_btn").prop("name");
+            console.log(reply_id);
+            if ($("#comment_btn").prop("name") != '0') {
+                reply_id = $("#comment_btn").prop("name");
+            }
+
+            if (comment) {
+                $.ajax({
+                    url: "/{{ article.nid }}/comment.act",
+                    type: "POST",
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}", "comment": comment, "reply_id": reply_id},
+                    success: function (data) {
+                        if (data == "login") {
+                            location.href = "/login.html"
+                        } else {
+                            location.reload()
+                        }
+                    }
+                })
+            } else {
+                alert("你写内容了吗? 妈的智障 !")
+            }
+        }
+        function updown(type) {
+            if ("{{ request.session.username.nid }}") {
+                if ("{{ request.session.username.nid }}" === "{{ user_obj.nid }}") {
+                    if (type == "up") {
+                        $("#tip").text("不能推荐自己的文章!");
+                    } else {
+                        $("#tip").text("不能反对自己的文章!");
+                    }
+                    return
+                }
+                $.ajax({
+                    url: "/{{ article.nid }}/" + type + ".act",
+                    type: "POST",
+                    data: {"csrfmiddlewaretoken": "{{ csrf_token }}"},
+                    success: function (data) {
+                        if (data == "login") {
+                            location.href = "/login.html?url=" + location.pathname
+                        }
+
+                        $("#tip").text(data).css("color", "red").css("margin-left", "20px");
+
+                        if (data == "给你点个赞!") {
+                            $("#up_c").text(parseInt($("#up_c").text()) + 1)
+
+                        } else if (data == "老子过去就是一脚!") {
+                            $("#down_c").text(parseInt($("#down_c").text()) + 1)
+                        }
+                    }
+                })
+            }
+            else {
+                $("#tip").text("请先登录!");
+            }
+        }
+    </script>
+{% endblock %}
+
+
+
+
+

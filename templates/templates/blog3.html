@@ -1,0 +1,53 @@
+{% extends "mode2.html" %}
+
+
+
+
+
+
+{% block content %}
+
+
+    <div class="article_list">
+        {% for article in article_list %}
+            <div class="popover-title title"><a
+                    href="/{{ user_obj.blog.site }}/article/{{ article.nid }}.html">{{ article.title }}</a></div>
+            <div>
+
+                <div class="summary">
+                    {{ article.summary|safe }}
+                </div>
+            </div>
+            <div class="information">
+
+                发布于
+                {{ article.create_time|date:"Y-m-d H:i" }}
+                <a href=""><i class="fa fa-eye" aria-hidden="true"></i>{{ article.read_count }}
+                </a>
+                <a href=""><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ article.comment_count }}
+                </a>
+                <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{ article.up_count }}
+                </a>
+                <a href=""><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{ article.down_count }}
+                </a>
+            </div>
+        {% endfor %}
+
+    </div>
+    <nav id="page_list" aria-label="Page navigation">
+        <div class="page_ul">
+            <ul class="pagination">
+                {{ page_info.pager|safe }}
+            </ul>
+        </div>
+    </nav>
+
+
+{% endblock %}
+
+
+
+
+
+
+

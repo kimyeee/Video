@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/register.css">
+</head>
+<style>
+</style>
+<body>
+{#<div class="avatar">#}
+{##}
+{#</div>#}
+<div class="form">
+
+    <form class="" method="POST" action="/register.html" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <h2>用户注册</h2>
+        <div class="form-group">
+            <label>用户名</label><span class="error">{{ obj.errors.username.0 }}{{ my_error.user }}</span>
+            {{ obj.username }}
+        </div>
+        <div class="form-group">
+            <label>邮 箱</label><span class="error">{{ obj.errors.email.0 }}{{ my_error.email }}</span>
+            {{ obj.email }}
+        </div>
+        <div class="form-group">
+            <label>昵 称</label><span class="error">{{ obj.errors.nickname.0 }}</span>
+            {{ obj.nickname }}
+        </div>
+
+        <div class="avatar">
+            <label>头 像</label><span class="error">{{ my_error.avatar }}</span>
+            <input id="choice" type="text" name="avatar" onclick="fo();" value="default">
+{#            <h4>点击上传头像</h4>#}
+        </div>
+
+        <div class="form-group">
+            <label>密 码</label> <span id="check_pwd" class="error">{{ obj.errors.password.0 }}</span>
+            {{ obj.password }}
+        </div>
+        <div class="form-group">
+            <label>确认密码</label><span class="error"></span>
+            <input type="password" id="InputPassword2" name="password2" class="form-control" placeholder="请再输入密码">
+        </div>
+
+        <div class="form-group">
+            <p><label>验证码</label><span id="check_code" class="error">{{ my_error.code }}</span></p>
+            <input type="text" name="check_code" class="form-control" id="exampleInputEmail2" placeholder="请输入验证码">
+            <a><img src="/check_code/" alt=""></a>
+        </div>
+
+        <button type="submit" class="btn btn-default"> 注 册 </button>
+    </form>
+    <form id="iframe" method="POST" action="/avatar/" target="ifr" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input id="file1" name="r-avatar" type="file" onchange="upload();">
+
+        <iframe id="ifr1" name="ifr" src="" frameborder="0">
+        </iframe>
+{#        <button id="" onclick="foo();"> 提 交 </button>#}
+    </form>
+</div>
+<script src="/static/jquery.js"></script>
+<script>
+    $(".btn").click(function () {
+        if ($("#InputPassword1").val()!=$("#InputPassword2").val()){
+
+            $("#check_pwd").html("两次密码输入不一致!");
+            return false
+        }
+    });
+    function fo() {
+        document.getElementById("file1").click();
+    }
+
+    function upload() {
+
+{#            var content=document.getElementById("ifr").contentWindow.document.body.innerText;#}
+{#            alert(content)#}
+{#        };#}
+        document.getElementById("ifr1").onload=bbb;
+        document.getElementById("iframe").submit();
+
+    function bbb() {
+        var img_path = document.getElementById("ifr1").contentWindow.document.body.innerText;
+        console.log(img_path);
+        var tag = document.createElement("img");
+        tag.src = img_path;
+{#        tag.id = "iii";#}
+        document.getElementsByClassName("avatar")[0].appendChild(tag);
+        document.getElementById("choice").value = img_path;
+{#        document.getElementById("iii").style.width = "80%";#}
+{#        alert(content);#}
+    }
+
+{#        var formData = new FormData();#}
+{##}
+{#        formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');#}
+{#        formData.append("fafafa", $("#file1").files);#}
+{#        console.log(formData);#}
+{#        $.ajax({#}
+{#            url: "/avatar/",#}
+{#            type: "POST",#}
+{#            data: formData,#}
+{#            contentType:false,#}
+{#            processData:false,#}
+{#            success: function (data) {#}
+{#                alert(data);#}
+{#                var file_path = data;#}
+{#                var img = $("<img>");#}
+{#                img.src = file_path;#}
+{#                $(".avatar").append(img)#}
+{#            }#}
+{#        })#}
+    }
+
+
+    function foo() {
+        document.getElementById("ifr").onload=function () {
+            var content=document.getElementById("ifr").contentWindow.document.body.innerText;
+{#            alert(content)#}
+        };
+        document.getElementById("f1").submit()
+    }
+</script>
+</body>
+</html>

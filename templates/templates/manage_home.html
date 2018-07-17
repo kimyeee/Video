@@ -1,0 +1,21 @@
+{% extends "mode3.html" %}
+{% block css %}
+<style>
+    .jumbotron {
+        display: inline-block;
+        padding-left: 75px;
+        padding-bottom: 120px;
+        width: 100%;
+        height: 100%;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="welcome">
+    <div class="jumbotron">
+        <h1>Hello, {{ request.session.username.username }}!</h1>
+        <h2> welcome to the admin page ! </h2>
+       </div>
+    </div>
+{% endblock %}

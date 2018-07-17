@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/register2.css">
+</head>
+<style>
+</style>
+<body>
+
+<div class="form">
+
+    <form class="" method="POST" action="/register.html" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+        <h2>用户注册</h2>
+
+        <div style="position: relative;width: 100px;height: 100px">
+            <label>头像</label>
+       <img id="previewImg" src="/static/img/default.png" style="position: absolute;width: 100px;height: 100px" alt="">
+
+        </div>
+        <div class="avatar">
+            <label></label><span class="error">{{ my_error.avatar }}</span>
+            <input id="choice" type="file" name="avatar">
+        </div>
+
+
+        <div class="form-group">
+            <label>用户名</label><span class="error">{{ obj.errors.username.0 }}{{ my_error.user }}</span>
+            {{ obj.username }}
+        </div>
+        <div class="form-group">
+            <label>邮 箱</label><span class="error">{{ obj.errors.email.0 }}{{ my_error.email }}</span>
+            {{ obj.email }}
+        </div>
+        <div class="form-group">
+            <label>昵 称</label><span class="error">{{ obj.errors.nickname.0 }}</span>
+            {{ obj.nickname }}
+        </div>
+
+
+        <div class="form-group">
+            <label>密 码</label> <span id="check_pwd" class="error">{{ obj.errors.password.0 }}</span>
+            {{ obj.password }}
+        </div>
+        <div class="form-group">
+            <label>确认密码</label><span class="error"></span>
+            <input type="password" id="InputPassword2" name="password2" class="form-control" placeholder="请再输入密码">
+        </div>
+
+        <div class="form-group">
+            <p><label>验证码</label><span id="check_code" class="error">{{ my_error.code }}</span></p>
+            <input type="text" name="check_code" class="form-control" id="exampleInputEmail2" placeholder="请输入验证码">
+            <a><img id="code" src="/check_code/" alt=""></a>
+        </div>
+
+        <button type="submit" class="btn btn-default"> 注 册</button>
+        <span style="margin-left: 140px">已有帐号 ? <a href="/login.html"> 登 录 </a></span>
+    </form>
+
+</div>
+<script src="/static/jquery.js"></script>
+<script>
+    $(".btn").click(function () {
+        if ($("#InputPassword1").val() != $("#InputPassword2").val()) {
+            $("#check_pwd").html("两次密码输入不一致!");
+            return false
+        }
+    });
+
+    $("#code").click(function () {
+        $(this).attr('src', $(this).attr("src") + "?")
+    });
+
+
+    $(function () {
+        bindAvatar()
+    });
+
+
+     function bindAvatar(){
+            if(window.URL.createObjectURL){
+                bindAvatar2();
+            }else if(window.FileReader){
+                bindAvatar3()
+            }else{
+                bindAvatar1();
+            }
+        }
+    function bindAvatar1() {
+        $("#imgSelect").change(function () {
+            var obj=$(this)[0].files[0]
+
+            //Ajax 发送.....
+        })
+    }
+    function bindAvatar2() {
+        $("#choice").change(function () {
+            var obj = $(this)[0].files[0];
+
+            var v=window.URL.createObjectURL(obj);
+            $("#previewImg").attr("src",v);
+            $("#previewImg").load(function () {
+                window.URL.revokeObjectURL(v)
+            });
+
+        })
+    }
+    function bindAvatar3() {
+        $("#imgSelect").change(function () {
+            var obj = $(this)[0].files[0];
+
+            var reader=new FileReader();
+            reader.onload=function (e) {
+                $("#previewImg").attr("src",this.result);
+            };
+            reader.readAsDataURL(obj)
+
+
+        })
+    }
+
+    {#    function fo() {#}
+    {#        document.getElementById("file1").click();#}
+    {#    }#}
+    {##}
+    {#    function upload() {#}
+    {##}
+    {#        document.getElementById("ifr1").onload=bbb;#}
+    {#        document.getElementById("iframe").submit();#}
+    {#    }#}
+    {##}
+    {#    function bbb() {#}
+    {#        var img_path = document.getElementById("ifr1").contentWindow.document.body.innerText;#}
+    {#        console.log(img_path);#}
+    {#        var tag = document.createElement("img");#}
+    {#        tag.src = img_path;#}
+    {#        document.getElementsByClassName("avatar")[0].appendChild(tag);#}
+    {#        document.getElementById("choice").value = img_path;#}
+    {#    }#}
+
+</script>
+</body>
+</html>
