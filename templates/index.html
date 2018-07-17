@@ -9,17 +9,19 @@
 <div>
 </div>
 <br>
-<div><div class="jumbotron">
-                    <h1>Hello, world!</h1>
-                    <p>...</p>
-                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
-                    </div>
+<div>
+    {#    <div class="jumbotron">#}
+    {#        <h1>Hello, world!</h1>#}
+    {#        <p>...</p>#}
+    {#        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>#}
+    {#    </div>#}
     <div id="mm">
 
     </div>
 </div>
 <br>
 <div>
+
     <form action="">
         <input type="text" style="height: 25px;width: 180px">
         <p><input type="submit" value="提交"></p>
@@ -36,11 +38,10 @@
             console.log(data.data.results);
             data = data.data.results;
             for (var i = 0; i < data.length; i++) {
-                $("#mm").append($('<div class="jumbotron">\n' +
-                    '  <h1>Hello, world!</h1>\n' +
-                    '  <p>...</p>\n' +
-                    '  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>\n' +
-                    '</div>'))
+                console.log(data[0]);
+                var tag = $('<div class="jumbotron"></div>');
+                tag.append('<h2>' + data[0].name + '</h2><h2>' + data[0].actor + '</h2><h2>' + '<img src="'+data[0].cover+'" width=480px>' + '</h2><h2>' + data[0].type + '</h2><h2>' + data[0].summarize + '</h2>');
+                $("#mm").append(tag);
             }
         }
     )
