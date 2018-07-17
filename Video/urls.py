@@ -18,6 +18,6 @@ from django.conf.urls import url, include
 from video1.views import index
 
 urlpatterns = [
-    url(r'^', include('video1.urls')),
+    url(r'', include('video1.urls')),
     url(r'^$', index),
 ]

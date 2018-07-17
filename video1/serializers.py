@@ -13,7 +13,7 @@ logger = logging.getLogger('django')
 class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
-        fields = ['name']
+        fields = ['name', 'cover', 'actor', 'type', 'summarize']
 
 
 # class VideoDetailSerializer(serializers.ModelSerializer):
@@ -25,4 +25,4 @@ class VideoSerializer(serializers.ModelSerializer):
 class TagsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tags
-        fields = ['openid']
+        fields = ['name']
