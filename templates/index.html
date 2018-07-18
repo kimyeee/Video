@@ -4,43 +4,65 @@
     <meta charset="UTF-8">
     <title>首页</title>
     <link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .item {
+            height: 300px;
+        }
+
+        .cover {
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
 <div>
 </div>
 <br>
 <div>
-    {#    <div class="jumbotron">#}
-    {#        <h1>Hello, world!</h1>#}
-    {#        <p>...</p>#}
-    {#        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>#}
-    {#    </div>#}
-    <div id="mm">
+    <div id="mm" style="margin: 1.5em;width: 12em;min-width: 600px">
 
+        <div class="media">
+            <div class="media-left media-middle">
+                <img src="https://img1.doubanio.com/view/photo/l/public/p2519432317.webp" width="280px" height="360px">
+            </div>
+            <div class="media-body" style="">
+                <a href="/" style="font-size: 25px">我不是药神</a>
+                <div class="media-heading">主演 :徐峥</div>
+                <div class="media-heading">类型 :剧情</div>
+                <div class="media-heading">简介
+                    :一位不速之客的意外到访，打破了神油店老板程勇的平凡人生，他从一个交不起房租的男性保健品商贩，
+                    一跃成为印度仿制药“格列宁”的独家代理商。收获巨额利润的他，生活剧烈变化，被病患们冠以“药神”
+                    的称号。但是，一场关于救赎的拉锯战也在波涛暗涌中慢慢展开。
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <br>
-<div>
 
-    <form action="">
-        <input type="text" style="height: 25px;width: 180px">
-        <p><input type="submit" value="提交"></p>
-    </form>
-</div>
 </body>
 <script src="../static/js/jquery-3.3.1.js" type="text/javascript"></script>
 {#<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js" type="text/javascript"></script>#}
 <script>
     console.log(1);
     $.getJSON(
-        "http://192.168.1.4:8888/a/",
+        "http://192.168.1.169:8888/a/",
         function (data) {
             console.log(data.data.results);
             data = data.data.results;
             for (var i = 0; i < data.length; i++) {
-                console.log(data[0]);
-                var tag = $('<div class="jumbotron"></div>');
-                tag.append('<h2>' + data[0].name + '</h2><h2>' + data[0].actor + '</h2><h2>' + '<img src="'+data[0].cover+'" width=480px>' + '</h2><h2>' + data[0].type + '</h2><h2>' + data[0].summarize + '</h2>');
+                console.log(data[i]);
+                var tag = $('<div class="media"></div>');
+                tag.append('<div class="media-left media-middle"><img src="#cover" width="280px" height="360px"></div>'.replace('#cover', data[i].cover));
+                tag.append('<div class="media-body"><a href="/" style="font-size: 25px">片名 :' +
+                    '#name</a><div class="media-heading">主演 :' +
+                    '#actor</div><div class="media-heading">类型 :' +
+                    '#type</div><div class="media-heading">简介 :' +
+                    '#summarize</div></div>'.replace('#name', data[i].name).replace('#actor', data[i].actor).replace('#type', data[i].type).replace('#summarize', data[i].summarize));
+                {#tag.append(#}
+                {#    '<h5> 片名 :' + data[i].name + '</h5><h5> 主演 :' + data[i].actor + '</h5>' +#}
+                {#    '<img src="' + data[i].cover + '" width=480px>' +#}
+                {#    '<h5> 类型 :' + data[i].type + '</h5><h5> 简介 :' + data[i].summarize + '</h5>');#}
                 $("#mm").append(tag);
             }
         }
