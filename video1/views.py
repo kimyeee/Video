@@ -19,7 +19,7 @@ def home(request):
 
 
 def detail(request):
-    return render(request, 'video_detail.html')
+    return render(request, 'video_detail.html', {'title': '我不是药神'})
 
 
 class IndexViewSet(mixins.CreateModelMixin,
