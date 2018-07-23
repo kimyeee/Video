@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 
-from video1.views import index,home
+from video1.views import index,home,detail
 
 urlpatterns = [
     url(r'', include('video1.urls')),
     url(r'b', home),
+    url(r'video-detail', detail),
     url(r'^$', index),
 ]
