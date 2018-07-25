@@ -1,0 +1,109 @@
+{% extends "mode3.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <style>
+        .article_edit {
+            display: inline-block;
+            padding-left: 25px;
+            padding-bottom: 20px;
+            width: 95%;
+            height: 100%;
+        }
+        .select{
+            margin-top: 8px;
+        }
+        textarea.form-control{
+            resize: none;
+        }
+
+        .select li{
+            display: inline-block;
+            margin: 5px;
+        }
+    .errors{
+        margin-left: 20px;
+        color: red;
+    }
+        .ke-edit-iframe img{
+            width: 70%;
+        }
+    .btn-default{
+        float: right;
+        margin-top: 6px;
+        width: 110px;
+        background-color:#0CAD11;
+        color: white;
+    }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="article_edit">
+        <form method="POST" action="/manage/create_article.html" novalidate>
+            {% csrf_token %}
+            <div>
+                <p>文章标题 <span class="errors">{{ obj.errors.title.0 }}</span></p>
+{#                {% if obj.title %}#}
+                {{ obj.title }}
+{#                    {% else %}#}
+{#                    {{ article_obj.title }}#}
+{#                {% endif %}#}
+
+            </div>
+            <div class="select">
+                <p>文章分类<span class="errors">{{ obj.errors.article_type_id.0 }}</span></p>
+                {{ obj.article_type_id }}
+            </div>
+            <div class="select">
+                <p>个人分类<span class="errors">{{ obj.errors.category_id.0 }}</span></p>
+                {{ obj.category_id }}
+            </div>
+            <div class="select">
+                <p>文章标签<span class="errors">{{ obj.errors.tags.0 }}</span></p>
+                {{ obj.tags }}
+            </div>
+            <div>
+                <p>文章简介<span class="errors">{{ obj.errors.summary.0 }}</span></p>
+                {{ obj.summary }}
+            </div>
+            <div>
+                <p>文章内容<span class="errors">{{ obj.errors.content.0 }}</span></p>
+                {{ obj.content }}
+            </div>
+            <input type="submit" class="btn btn-default" value=" 修 改 文 章 ">
+        </form>
+    </div>
+{% endblock %}
+{% block js %}
+    <script src="/static/kindeditor-4.1.10/kindeditor-all.js"></script>
+
+    <script>
+        KindEditor.create(".kind-content", {
+            width: "100%",
+            height: "300px",
+            resizeType: 1,
+            uploadJson: '/upload_img.act',
+            extraFileUploadParams: {
+                "csrfmiddlewaretoken": "{{ csrf_token }}"
+            }
+        })
+    </script>
+{#        <script src="/static/jquery.js"></script>#}
+{##}
+{#    <script>#}
+{#    $(function () {#}
+{#        $.ajax({#}
+{#            url:"/manage/edit_article.act",#}
+{#            type:"POST",#}
+{#            data:{"csrfmiddlewaretoken": "{{ csrf_token }}",#}
+{#                "article_id":"{{ article.nid }}",#}
+{#            },#}
+{#            success:function (data) {#}
+{#                alert(data)#}
+{#            }#}
+{#        })#}
+{#    })#}
+{##}
+{#    </script>#}
+{% endblock %}

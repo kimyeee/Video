@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册博客</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+</head>
+<body>
+
+<div class="form">
+
+    <form method="POST" action="/register_blog/{{ username }}.html">
+        {% csrf_token %}
+        <h3>注册博客</h3>
+        <div class="form-group">
+            <p><label></label><span class="error">{{ obj.errors.username.0 }}</span></p>
+            用户名:{{ username }}
+        </div>
+
+        <div class="form-group">
+            <label>博客地址</label><span class="error">{{ obj.errors.blog_site.0 }}{{ my_error.user }}</span>
+            {{ obj.blog_site }}
+        </div>
+        <div class="form-group">
+            <label>博客主题</label><span class="error">{{ obj.errors.blog_site.0 }}{{ my_error.user }}</span>
+            {{ obj.theme }}
+        </div>
+
+        <button type="submit" class="btn btn-default"> 提 交 </button><span class="error">{{ login_error }}</span>
+    </form>
+</div>
+</body>
+</html>

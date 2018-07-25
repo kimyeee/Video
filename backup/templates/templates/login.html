@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+</head>
+<body>
+
+<div class="form">
+
+    <form method="POST" action="/login.html?url={{ url }}" novalidate>
+        {% csrf_token %}
+        <h2>用户登录</h2>
+        <div class="form-group">
+            <p><label>用户名</label><span class="error">{{ obj.errors.username.0 }}</span></p>
+            {{ obj.username }}
+        </div>
+
+        <div class="form-group">
+            <p><label>密 码</label><span class="error">{{ obj.errors.password.0 }}</span></p>
+            {{ obj.password }}
+        </div>
+
+        <div class="form-group">
+            <p><label>验证码</label><span class="error">{{ code_error }}</span></p>
+            <input type="text" name="check_code" class="form-control" id="exampleInputEmail2" placeholder="请输入验证码">
+            <a><img id="code" src="/check_code/" alt=""></a>
+        </div>
+        <p><input name="session" type="checkbox">是否15天之内免登陆 <a style="margin-left: 100px" href="">忘记密码?</a></p>
+        <button type="submit" class="btn btn-default"> 登 录</button>
+        <span style="margin-left: 10px">没有帐号 ? 点击 <a href="/register.html">注册 </a>吧!或者访问 <a href="/">主页 </a></span>
+    </form>
+</div>
+</body>
+<script src="/static/jquery.js"></script>
+<script>
+    $("#code").click(function () {
+        $(this).attr('src', $(this).attr("src") + "?")
+    });
+</script>
+</html>

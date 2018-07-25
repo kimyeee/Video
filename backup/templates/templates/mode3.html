@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理系统</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/mode.css">
+    {% block css %}
+
+    {% endblock %}
+
+</head>
+<body>
+<div id="body">
+    <div id="pg-header">
+        <div id="logo">
+            后台管理系统
+        </div>
+        <div id="avatar">
+            <img src="{{ user_obj.avatar }}" alt="">
+            <div id="userinfo">
+                <p><a href=""><i class="fa fa-id-card" aria-hidden="true"></i> 个人资料</a></p>
+                <p><a href="/exit.act"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></p>
+            </div>
+        </div>
+        <div id="pg-header-r">
+            <a href="/"><i class="fa fa-home" aria-hidden="true"></i> 主页</a>
+            <a href=""><i class="fa fa-comment" aria-hidden="true"></i> 消息</a>
+            <a href=""><i class="fa fa-envelope" aria-hidden="true"></i> 邮件</a>
+         </div>
+
+
+    </div>
+    <div id="pg-body">
+        <div id="" class="menus">
+            <a href="/manage/article-0-0-0.html"><i class="fa fa-file-text-o" aria-hidden="true"></i> 文章管理</a>
+            <a href="/manage/category.html"><i class="fa fa-list" aria-hidden="true"></i> 分类管理</a>
+            <a href="/manage/tag.html"><i class="fa fa-tag" aria-hidden="true"></i> 标签管理</a>
+            <a href="/manage/{{ request.session.username.username }}.html"><i class="fa fa-address-card-o" aria-hidden="true"></i> 个人信息</a>
+        </div>
+
+        <div id="content">
+
+            {% block content %}
+
+            {% endblock %}
+
+    </div>
+    </div>
+</div>
+{% block js %}
+
+{% endblock %}
+</body>
+</html>

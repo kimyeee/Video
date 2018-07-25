@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/default.css">
+    {#    <link rel="stylesheet" href="/static/css/home.css">#}
+</head>
+<body>
+<div class="head">
+    <div class="pg-header">
+        <div class="header-l">
+            <a href="/{{ userinfo.site }}.html" style="color: white">{{ userinfo.username }}的个人博客</a>
+
+        </div>
+        <div class="header-r">
+            <a href="/"><i class="fa fa-home" aria-hidden="true"></i> 首页</a>
+            <a href=""><i class="fa fa-user-o" aria-hidden="true"></i> 个人首页</a>
+            <a href=""><i class="fa fa-cog" aria-hidden="true"></i> 管理</a>
+        </div>
+    </div>
+</div>
+<div class="body">
+    <div class="pg-body">
+        <div class="body-l">
+            <div class="bulletin">
+                <h4>公告</h4>
+                <ul>
+                    <li>昵称 : <a href="">{{ userinfo.nickname }}</a></li>
+                    <li>粉丝 : <a href="">{{ userinfo.user_fans }}</a></li>
+                    <li>关注 : <a href="">{{ userinfo.user_follower }}</a></li>
+                    <li>邮箱 : <a href="">{{ userinfo.email }}</a></li>
+                </ul>
+
+            </div>
+            <div class="tag">
+                <h5>标签</h5>
+                <ul>
+
+                </ul>
+            </div>
+            <div class="category">
+                <h5>分类</h5>
+                <ul>
+                    {% for type in all_type_list %}
+                        {% if type.0 in type_list %}
+                            {% if article_type_id == type.0 %}
+                                <li class="active"><a href="/{{ userinfo.site }}/{{ type.0 }}.html">{{ type.1 }}</a>
+                                </li>
+                            {% else %}
+                                <li><a href="/{{ userinfo.site }}/{{ type.0 }}.html">{{ type.1 }}</a></li>
+                            {% endif %}
+                        {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="time">
+                <h5>时间</h5>
+                <ul>
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="body-r">
+            <div class="article_list">
+                {% for article in article_list %}
+                    <div class="popover-title title"><a href="">{{ article.title }}</a></div>
+                    <div>
+                        <div class="avatar">
+                            <img src="{{ article.blog.user.avatar }}" alt="">
+                        </div>
+                        <div class="summary">
+                            <a href="">{{ article.summary }}</a>
+                        </div>
+                    </div>
+                    <div class="information">
+
+                        发布于
+                        {{ article.create_time|date:"Y-m-d H:i" }}
+                        <a href=""><i class="fa fa-eye" aria-hidden="true"></i>{{ article.read_count }}
+                        </a>
+                        <a href=""><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ article.comment_count }}
+                        </a>
+                        <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{ article.up_count }}
+                        </a>
+                        <a href=""><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{ article.down_count }}
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                {{ page_info.pager|safe }}
+
+            </ul>
+        </nav>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/jquery.js"></script>
+<script>
+
+</script>
+</body>
+</html>

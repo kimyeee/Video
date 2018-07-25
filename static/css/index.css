@@ -1,0 +1,56 @@
+.item {
+    clear: both;
+    max-height: 500px;
+}
+
+a {
+    text-decoration: none;
+}
+
+* {
+    margin: 0;
+    text-decoration: none;
+}
+
+.right_c a {
+    color: #5e5e5e;
+}
+
+.btn a {
+    color: white;
+}
+
+.item_footer {
+    /*{#float: right#}*/
+
+}
+
+.item_footer span {
+    margin: 8px 8px 8px 0;
+}
+
+/*{##}*/
+/*{#.media-left {#}*/
+/*{#    width: 15%#}*/
+/*{#        #}*/
+
+.media-left img {
+    max-height: 200px;
+}
+
+.media-body a {
+    font-size: 25px;
+}
+
+.panel-body .media {
+    width: 48%;
+    display: inline-block
+}
+
+.panel-body .media-body {
+    width: 20%
+}
+
+.panel-body .media-body img {
+    width: 85%
+}

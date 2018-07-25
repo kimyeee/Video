@@ -1,0 +1,108 @@
+{% extends "mode3.html" %}
+{% block css %}
+    <link rel="stylesheet" href="/static/css/manage.css">
+{% endblock %}
+{% block content %}
+    <div id="content-path">
+        <ol class="breadcrumb">
+            <li><a href="javascript:void(0);">首页</a></li>
+            <li><a href="javascript:void(0);">文章管理</a></li>
+        </ol>
+
+    </div>
+    <div class="screen">
+        <p class="list-group-item list-group-item-info">搜索条件</p>
+        <div class="screen_list">
+            <span class="screen_title">总 分 类</span>
+            {% if kwargs.article_type_id == 0 %}
+                <a class="active" href="/manage/article-0-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html"> 全部</a>
+            {% else %}
+                <a href="/manage/article-0-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html"> 全部</a>
+            {% endif %}
+            {% for type in article_type_choice %}
+                {% if kwargs.article_type_id == type.0 %}
+                    <a class="active"
+                       href="/manage/article-{{ type.0 }}-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">{{ type.1 }}</a>
+                {% else %}
+                    <a href="/manage/article-{{ type.0 }}-{{ kwargs.category_id }}-{{ kwargs.tags__nid }}.html">{{ type.1 }}</a>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="screen_list">
+            <span class="screen_title">个人分类</span>{% if kwargs.category_id == 0 %}
+            <a class="active" href="/manage/article-{{ kwargs.article_type_id }}-0-{{ kwargs.tags__nid }}.html">全部</a>
+        {% else %}
+            <a href="/manage/article-{{ kwargs.article_type_id }}-0-{{ kwargs.tags__nid }}.html">全部</a>
+        {% endif %}
+            {% for category in category_list %}
+                {% if category.nid == kwargs.category_id %}
+                    <a class="active"
+                       href="/manage/article-{{ kwargs.article_type_id }}-{{ category.nid }}-{{ kwargs.tags__nid }}.html">{{ category.title }}</a>
+                {% else %}
+                    <a href="/manage/article-{{ kwargs.article_type_id }}-{{ category.nid }}-{{ kwargs.tags__nid }}.html">{{ category.title }}</a>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        <div class="screen_list">
+            <span class="screen_title">标签分类</span>
+            {% if kwargs.tags__nid == 0 %}
+                <a class="active"
+                   href="/manage/article-{{ kwargs.article_type_id }}-{{ kwargs.category_id }}-0.html">全部</a>
+            {% else %}
+                <a href="/manage/article-{{ kwargs.article_type_id }}-{{ kwargs.category_id }}-0.html">全部</a>
+            {% endif %}
+            {% for tag in tag_list %}
+                {% if kwargs.tags__nid == tag.nid %}
+                    <a class="active"
+                       href="/manage/article-{{ kwargs.article_type_id }}-{{ kwargs.category_id }}-{{ tag.nid }}.html">{{ tag.title }}</a>
+                {% else %}
+                    <a href="/manage/article-{{ kwargs.article_type_id }}-{{ kwargs.category_id }}-{{ tag.nid }}.html">{{ tag.title }}</a>
+                {% endif %}
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+    <div><p class="list-group-item list-group-item-info">搜索结果 <a class="create_article"
+                                                                 href="/manage/create_article.html"><i
+            class="fa fa-pencil" aria-hidden="true"></i> 创建新文章</a></p></div>
+    <div class="article_list">
+
+        {% for article in article_list %}
+            <div>
+                <a class="title" href="/{{ article.blog.site }}/article/{{ article.nid }}.html">{{ article.title }}</a>
+                <div class="action">
+                    <a href="javascript:void(0);" class="btn btn-danger"> 删 除 </a>
+                    <a href="/manage/edit_article/{{ article.nid }}.html" class="btn btn-info"> 编 辑 </a>
+{#                    <a href="javascript:void(0);" onclick="edit_article();" class="btn btn-info"> 编 辑 </a>#}
+                </div>
+            </div>
+            <div>
+                <div class="summary">
+                    {{ article.summary|safe }}
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+
+
+
+{% endblock %}
+{% block js %}
+    <script src="/static/jquery.js"></script>
+    <script>
+    function edit_article() {
+        $.ajax({
+            url:"manage/edit_article.act",
+            type:"POST",
+            data:{"csrfmiddlewaretoken": "{{ csrf_token }}",
+                "article_id":"{{ article.nid }}",
+            }
+        })
+    }
+    </script>
+{% endblock %}

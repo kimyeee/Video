@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="/static/css/default.css">
+    {#    <link rel="stylesheet" href="/static/css/home.css">#}
+</head>
+<body>
+<div class="head">
+    <div class="pg-header">
+        <div class="header-l">
+            <a href="/{{ user_obj.blog.site }}.html" style="color: white">{{ user_obj.username }}的个人博客</a>
+
+        </div>
+        <div class="header-r">
+            <a href="/"><i class="fa fa-home" aria-hidden="true"></i> 首页</a>
+            <a href=""><i class="fa fa-user-o" aria-hidden="true"></i> 个人首页</a>
+            <a href=""><i class="fa fa-cog" aria-hidden="true"></i> 管理</a>
+        </div>
+    </div>
+</div>
+<div class="body">
+    <div class="pg-body">
+        <div class="body-l">
+            <div class="bulletin">
+                <h4>公告</h4>
+                <ul>
+                    <li>昵称 : <a href="">{{ user_obj.nickname }}</a></li>
+                    <li>粉丝 : <a href="">{{ user_obj.fans.count }}</a></li>
+                    <li>关注 : <a href="">{{ user_obj.followers.count }}</a></li>
+                    <li>邮箱 : <a href="">{{ user_obj.email }}</a></li>
+                </ul>
+
+            </div>
+            <div class="tag">
+                <h5>标签</h5>
+                <ul>
+                    {% for item in tag_dic %}
+                        {% if tag_id == item.article2tag__tag__nid %}
+                            <li class="active">
+                                <a href="/{{ user_obj.blog.site }}/tag/{{ item.article2tag__tag__nid }}.html">{{ item.article2tag__tag__title }}({{ item.tag_count }})</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/{{ user_obj.blog.site }}/tag/{{ item.article2tag__tag__nid }}.html">{{ item.article2tag__tag__title }}({{ item.tag_count }})</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="category">
+                <h5>分类</h5>
+                <ul>
+                    {% for item in category_dic %}
+                        {% if category_id == item.category_id %}
+                            <li class="active">
+                                <a href="/{{ user_obj.blog.site }}/category/{{ item.category_id }}.html">{{ item.category__title }}({{ item.category_count }})</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/{{ user_obj.blog.site }}/category/{{ item.category_id }}.html">{{ item.category__title }}({{ item.category_count }})</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+            <div class="time">
+                <h5>时间</h5>
+                <ul>
+                    {% for item in time_dic %}
+                        {% if time_id == item.time_type %}
+                            <li class="active">
+                                <a href="/{{ user_obj.blog.site }}/time/{{ item.time_type }}.html">{{ item.time_type }}({{ item.time_count }})</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="/{{ user_obj.blog.site }}/time/{{ item.time_type }}.html">{{ item.time_type }}({{ item.time_count }})</a>
+                            </li>
+                        {% endif %}
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+
+        </div>
+        <div class="body-r">
+            <div class="article_list">
+                {% for article in article_list %}
+                    <div class="popover-title title"><a href="/{{ user_obj.blog.site }}/article/{{ article.nid }}.html">{{ article.title }}</a></div>
+                    <div>
+                        <div class="avatar">
+                            <img src="{{ article.blog.user.avatar }}" alt="">
+                        </div>
+                        <div class="summary">
+                            {{ article.summary }}
+                        </div>
+                    </div>
+                    <div class="information">
+
+                        发布于
+                        {{ article.create_time }}
+                        <a href=""><i class="fa fa-eye" aria-hidden="true"></i>{{ article.read_count }}
+                        </a>
+                        <a href=""><i class="fa fa-commenting-o" aria-hidden="true"></i>{{ article.comment_count }}
+                        </a>
+                        <a href=""><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>{{ article.up_count }}
+                        </a>
+                        <a href=""><i class="fa fa-thumbs-o-down" aria-hidden="true"></i>{{ article.down_count }}
+                        </a>
+                    </div>
+                {% endfor %}
+
+            </div>
+            <nav id="page_list" aria-label="Page navigation">
+                <div class="page_ul">
+                <ul class="pagination">
+                    {{ page_info.pager|safe }}
+                </ul>
+                </div>
+            </nav>
+        </div>
+
+    </div>
+</div>
+
+<script src="/static/jquery.js"></script>
+<script>
+
+</script>
+</body>
+</html>

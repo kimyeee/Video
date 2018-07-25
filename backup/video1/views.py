@@ -19,7 +19,7 @@ def home(request):
 
 
 def detail(request):
-    return render(request, 'detail.html', {'title': '我不是药神',
+    return render(request, 'video_detail.html', {'title': '我不是药神',
                                                  'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
 
 
