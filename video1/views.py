@@ -19,7 +19,8 @@ def home(request):
 
 
 def detail(request):
-    return render(request, 'video_detail.html', {'title': '我不是药神'})
+    return render(request, 'video_detail.html', {'title': '我不是药神',
+                                                 'video_url': 'https://v.youku.com/v_show/id_XMzY0NzIwODI3Ng==.html?spm=a2h03.8173536.2100006.8'})
 
 
 class IndexViewSet(mixins.CreateModelMixin,
