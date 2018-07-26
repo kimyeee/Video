@@ -1,6 +1,8 @@
 .item {
     clear: both;
     max-height: 500px;
+    width: 32%;
+    display: inline-block;
 }
 
 a {
@@ -29,13 +31,8 @@ a {
     margin: 8px 8px 8px 0;
 }
 
-/*{##}*/
-/*{#.media-left {#}*/
-/*{#    width: 15%#}*/
-/*{#        #}*/
-
 .media-left img {
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .media-body a {
@@ -53,4 +50,50 @@ a {
 
 .panel-body .media-body img {
     width: 85%
+}
+
+#notice {
+    background-color: #5bc0de;
+    text-align: center;
+    margin-top: -20px;
+    font-size: 17px;
+}
+
+#tgBigox {
+    position: relative;
+    width: 90%;
+    /*margin-left: 10%;*/
+    height: 30px;
+    line-height: 30px;
+    overflow: hidden;
+    margin-top: -20px;
+}
+
+#tgGoox {
+    position: absolute;
+    height: 30px;
+    line-height: 30px;
+    top: 0;
+    width: 900px;
+    left: 60px;
+}
+
+#tgGoox a {
+    color: #fff;
+    margin-left: 10px;
+    /*float: left;*/
+}
+
+#tgGoox a:hover {
+    color: #000;
+}
+
+.filter_field {
+    padding: 10px;
+    margin: 5px;
+    cursor:pointer;
+}
+
+hr{
+    margin: 10px 0;
 }
