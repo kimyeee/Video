@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 
-from video1.views import index, home, detail, search, filter
+from movie.views import index, home, detail, search, filter
 
 urlpatterns = [
     # url(r'', include('video1.urls')),
