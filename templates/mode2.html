@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <link href="../static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/img/favicon.ico">
+    <script src="../static/js/jquery-3.3.1.js" type="text/javascript"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+
+{% include "menu.html" %}
+
+{% block content %}
+
+{% endblock %}
+<span id="back-to-top" style="position: fixed;right: 30px;bottom: 30px;font-size: 25px">
+        <span class="glyphicon glyphicon-menu-up btn btn-default" aria-hidden="true"></span>
+    </span>
+<div style="padding: 5%;text-align: center">MYSITE.COM ® INC.ALL RIGHTS RESERVED</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //首先将#back-to-top隐藏
+        $("span#back-to-top").hide();
+        //当滚动条的位置处于距顶部100像素以下时，跳转链接出现，否则消失
+        $(function () {
+            $(window).scroll(function () {
+                if ($(window).scrollTop() > 500) {
+                    $("#back-to-top").fadeIn(1500);
+                } else {
+                    $("#back-to-top").fadeOut(1500);
+                }
+            });
+            //当点击跳转链接后，回到页面顶部位置
+            $("#back-to-top").click(function () {
+                $('body,html').animate({
+                        scrollTop: 0
+                    },
+                    1000);
+                return false;
+            });
+        });
+    });
+</script>
+{% block js %}
+
+{% endblock %}
+
+</body>
+</html>

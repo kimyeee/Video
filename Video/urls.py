@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import url, include
 
 from movie.views import index, home, detail, search, filter
+from video1.views import v_index
+
+
 
 urlpatterns = [
     # url(r'', include('video1.urls')),
@@ -23,5 +26,6 @@ urlpatterns = [
     url(r'video-detail', detail),
     url(r'search', search),
     url(r'filter', filter),
+    url(r'^2$', v_index),
     url(r'^$', index),
 ]

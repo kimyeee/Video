@@ -22,7 +22,7 @@ from django.shortcuts import render_to_response
 #     print('+' * 60, c)
 # c += 1
 
-def index(request):
+def v_index(request):
     return render(request, 'index2.html')
 
 

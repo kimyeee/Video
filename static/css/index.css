@@ -1,9 +1,9 @@
 .item {
     clear: both;
     max-height: 500px;
-    width: 31%;
+    width: 166px;
     display: inline-block;
-    margin: 0 5px;
+    margin: 5px;
 }
 
 a {
@@ -33,7 +33,7 @@ a {
 }
 
 .media-left img {
-    max-height: 300px;
+    max-height: 240px;
 }
 
 .media-body a {
@@ -41,8 +41,8 @@ a {
 }
 
 .panel-body .media {
-    width: 48%;
-    display: inline-block
+    /*width: 48%;*/
+    /*display: inline-block*/
 }
 
 .panel-body .media-body {
