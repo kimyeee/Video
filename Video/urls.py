@@ -26,6 +26,6 @@ urlpatterns = [
     url(r'video-detail', detail),
     url(r'search', search),
     url(r'filter', filter),
-    url(r'^2$', v_index),
+    url(r'index2/', v_index),
     url(r'^$', index),
 ]

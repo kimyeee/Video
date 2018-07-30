@@ -11,7 +11,7 @@ from django.shortcuts import render_to_response
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'movie/index.html')
 
 
 def home(request):
@@ -19,7 +19,7 @@ def home(request):
 
 
 def detail(request):
-    return render(request, 'video_detail.html', {'title': '我不是药神',
+    return render(request, 'movie/video_detail.html', {'title': '我不是药神',
                                                  'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
 
 

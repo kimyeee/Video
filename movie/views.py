@@ -23,7 +23,7 @@ from django.shortcuts import render_to_response
 # c += 1
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'movie/index.html')
 
 
 def home(request):
@@ -35,7 +35,7 @@ def filter(request):
 
 def search(request):
     print(request.content_params)
-    return render(request, 'search.html', {'title': '我不是药神'})
+    return render(request, 'movie/search.html', {'title': '我不是药神'})
 
 
 def detail(request):
