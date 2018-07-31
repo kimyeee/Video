@@ -54,8 +54,8 @@ ROOT_URLCONF = 'Video.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\admin\PycharmProjects\Video\templates'],
-        # 'DIRS': [r'D:\project\Video\templates'],
+        # 'DIRS': [r'C:\Users\admin\PycharmProjects\Video\templates'],
+        'DIRS': [r'D:\project\Video\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,48 +128,48 @@ if not os.path.isdir(LOG_ROOT):
     os.makedirs(LOG_ROOT)
 
 # 日志系统
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'default': {
-            'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(levelname)s]- %(message)s'
-        },
-        'simple': {
-            'format': '%(levelname)s %(asctime)s %(message)s'
-        }
-    },
-    'handlers': {
-        'file': {
-            'level': 'DEBUG',
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'filename': '%s/log.log' % LOG_ROOT,
-            'formatter': 'simple'
-        },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'default',
-        },
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False
-        },
-        'django.request': {
-            'handlers': ['console'],
-            'level': 'INFO',
-            'propagate': False
-        },
-        'django.db': {
-            'handlers': ['console'],
-            'propagate': False,
-            'level': 'DEBUG',
-        },
-    }
-}
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'formatters': {
+#         'default': {
+#             'format': '%(asctime)s [%(threadName)s:%(thread)d] [%(name)s:%(lineno)d] [%(levelname)s]- %(message)s'
+#         },
+#         'simple': {
+#             'format': '%(levelname)s %(asctime)s %(message)s'
+#         }
+#     },
+#     'handlers': {
+#         'file': {
+#             'level': 'DEBUG',
+#             'class': 'logging.handlers.TimedRotatingFileHandler',
+#             'filename': '%s/log.log' % LOG_ROOT,
+#             'formatter': 'simple'
+#         },
+#         'console': {
+#             'level': 'DEBUG',
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'default',
+#         },
+#     },
+#     'loggers': {
+#         'django': {
+#             'handlers': ['console'],
+#             'level': 'INFO',
+#             'propagate': False
+#         },
+#         'django.request': {
+#             'handlers': ['console'],
+#             'level': 'INFO',
+#             'propagate': False
+#         },
+#         'django.db': {
+#             'handlers': ['console'],
+#             'propagate': False,
+#             'level': 'DEBUG',
+#         },
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/

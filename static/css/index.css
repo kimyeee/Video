@@ -37,12 +37,11 @@ a {
 }
 
 .media-body a {
-    font-size: 25px;
+    font-size: 20px;
 }
 
-.panel-body .media {
-    /*width: 48%;*/
-    /*display: inline-block*/
+.media {
+    margin-top: 5px;
 }
 
 .panel-body .media-body {
@@ -92,9 +91,9 @@ a {
 .filter_field {
     padding: 10px;
     margin: 5px;
-    cursor:pointer;
+    cursor: pointer;
 }
 
-hr{
+hr {
     margin: 10px 0;
 }

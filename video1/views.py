@@ -11,17 +11,6 @@ from video1.serializers import VideoSerializer
 from django.shortcuts import render_to_response
 
 
-# c = 0
-# s = time.time()
-# obj = Video.objects.filter(name='wo')
-# global c
-# global s
-#
-# if c % 100 == 0:
-#     print(time.time() - s)
-#     print('+' * 60, c)
-# c += 1
-
 def v_index(request):
     return render(request, 'video/index2.html')
 
