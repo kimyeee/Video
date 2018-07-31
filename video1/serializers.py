@@ -5,7 +5,7 @@ from rest_framework import serializers
 
 import logging
 
-from .models import Video, Tags
+from .models import Video
 
 logger = logging.getLogger('django')
 
@@ -22,7 +22,7 @@ class VideoSerializer(serializers.ModelSerializer):
 #         fields = ['openid']
 
 
-class TagsSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Tags
-        fields = ['name']
+# class TagsSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Tags
+#         fields = ['name']
