@@ -44,4 +44,3 @@ class Video2Type(models.Model):
     class Meta:
         db_table = 'video_2_type'
         ordering = ['-create_time']
-
