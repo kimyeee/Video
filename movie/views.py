@@ -29,7 +29,8 @@ def index(request):
 def home(request):
     return render(request, 'init.html')
 
-def filter(request):
+
+def video_filter(request):
     return render(request, 'filter.html')
 
 
@@ -40,7 +41,12 @@ def search(request):
 
 def detail(request):
     return render(request, 'movie/video_detail.html', {'title': '我不是药神',
-                                           'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
+                                                       'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
+
+
+def video_play(request):
+    return render(request, 'movie/video_play.html', {'title': '我不是药神',
+                                                     'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
 
 
 class IndexViewSet(mixins.CreateModelMixin,
