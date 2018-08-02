@@ -46,7 +46,7 @@ def detail(request):
 
 def video_play(request):
     return render(request, 'movie/video_play.html', {'title': '我不是药神',
-                                                     'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
+                                                     'video_url': 'http://v.youku.com/v_show/id_XMzY0NzIwODI3Ng==.html'})
 
 
 class IndexViewSet(mixins.CreateModelMixin,

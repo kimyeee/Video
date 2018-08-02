@@ -54,8 +54,8 @@ ROOT_URLCONF = 'Video.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r'C:\Users\admin\PycharmProjects\Video\templates'],
-        # 'DIRS': [r'D:\project\Video\templates'],
+        # 'DIRS': [r'C:\Users\admin\PycharmProjects\Video\templates'],
+        'DIRS': [r'D:\project\Video\templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

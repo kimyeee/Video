@@ -1,0 +1,22 @@
+import requests
+import bs4, re
+
+# res = requests.get('https://static.youku.com/paymentcenter/vip-pc/build/js/libs/config-build.js?version=1531712125266')
+res_str = open('youku1.js', 'r', encoding='utf8').read()
+# res_str = res.content.decode('utf8')
+ret = re.findall('hot_movie:.+shtml', res_str)
+ret2 = re.findall('week_swing:.+shtml', res_str)
+ret3 = re.findall('high_score:.+shtml', res_str)
+ret4 = re.findall('dazzle:.+shtml', res_str)
+ret5 = re.findall('burn:.+shtml', res_str)
+# open('youku1.html','wb').write(res.content)
+print(ret[0])
+print(ret2[0])
+print(ret3[0])
+print(ret4[0])
+print(ret5[0])
+print(ret[0][14:])
+print(ret2[0][15:])
+print(ret3[0][15:])
+print(ret4[0][11:])
+print(ret5[0][9:])
