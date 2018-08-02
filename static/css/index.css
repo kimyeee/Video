@@ -45,7 +45,8 @@ a {
 }
 
 .panel-body .media-body {
-    width: 20%
+    width: 20%;
+    text-align: center;
 }
 
 .panel-body .media-body img {
@@ -66,7 +67,7 @@ a {
     height: 30px;
     line-height: 30px;
     overflow: hidden;
-    margin-top: -20px;
+    /*margin-top: -20px;*/
 }
 
 #tgGoox {
