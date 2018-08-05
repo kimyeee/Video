@@ -27,7 +27,7 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'init.html')
+    return render(request, 'test.html')
 
 
 def video_filter(request):
