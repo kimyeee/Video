@@ -46,8 +46,9 @@ def detail(request, id):
 
 
 def video_play(request, id):
-    return render(request, 'movie/video_play.html', {'title': '我不是药神',
-                                                     'video_url': 'http://v.youku.com/v_show/id_XMTY0MjM1NjgwNA==.html'})
+    video = Video.objects.filter(id=id).first()
+    return render(request, 'movie/video_play.html', {'title': video.name, 'id': id,
+                                                     'video_url': video.video_url})
 
 
 class IndexViewSet(mixins.CreateModelMixin,
