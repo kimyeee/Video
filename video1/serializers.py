@@ -5,9 +5,15 @@ from rest_framework import serializers
 
 import logging
 
-from .models import Video, SpiderVideo
+from .models import Video, SpiderVideo, VideoClass
 
 logger = logging.getLogger('django')
+
+
+class VideoClassSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VideoClass
+        fields = ['id', 'video_class', 'create_time']
 
 
 class VideoSerializer(serializers.ModelSerializer):

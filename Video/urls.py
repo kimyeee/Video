@@ -19,10 +19,10 @@ from movie.views import index, home, detail, search, video_filter, video_play
 from video1.views import v_index
 
 urlpatterns = [
-    # url(r'', include('video1.urls')),
-    url(r'b', home),
-    url(r'video_detail', detail),
-    url(r'video_play', video_play),
+    url(r'^api/', include('video1.urls')),
+    url(r'home', home),
+    url(r'video_detail/(.+)/$', detail),
+    url(r'video_play/(.+)/$', video_play),
     url(r'search', search),
     url(r'filter', video_filter),
     url(r'index2/', v_index),

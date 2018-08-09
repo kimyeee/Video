@@ -27,7 +27,7 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'init.html')
+    return render(request, 'movie/list.html')
 
 
 def video_filter(request):
@@ -39,12 +39,13 @@ def search(request):
     return render(request, 'movie/search.html', {'title': '我不是药神'})
 
 
-def detail(request):
-    return render(request, 'movie/video_detail.html', {'title': '我不是药神',
-                                                       'video_url': 'http://www.iqiyi.com/v_19rrbooge4.html'})
+def detail(request, id):
+    video = Video.objects.filter(id=id).first()
+    return render(request, 'movie/video_detail.html', {'title': video.name, 'id': id,
+                                                       'video_url': video.video_url})
 
 
-def video_play(request):
+def video_play(request, id):
     return render(request, 'movie/video_play.html', {'title': '我不是药神',
                                                      'video_url': 'http://v.youku.com/v_show/id_XMTY0MjM1NjgwNA==.html'})
 
