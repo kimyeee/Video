@@ -9,7 +9,7 @@
     <div>
         <div class="row11">
             <div class="row" style="min-width: 1000px;margin: 2%">
-                <div id="mm" class="#" style="display:inline-block;margin:0 auto;width:78%;min-width: 78%;float: left">
+                <div id="mm" class="#" style="display:inline-block;margin:0 30px;width:72%;min-width: 72%;float: left">
 
                 </div>
                 <div class="right_c"
@@ -62,24 +62,10 @@
 
                 </div>
             </div>
-            <nav aria-label="Page navigation" style="margin-right:150px;text-align: center">
-                <ul class="pagination">
-                    <li>
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
+            <nav id="page_list" aria-label="Page navigation" style="margin-right:150px;text-align: center">
+{#                <ul  class="pagination">#}
+{#                    #}
+{#                </ul>#}
             </nav>
         </div>
     </div>
@@ -103,6 +89,15 @@
                         '<div class="media-heading">简介 : '+data[i].summarize+'</div></div>' );
                     $("#mm").append(tag);
                 }
+                var all_page = Math.ceil(data.length /10);
+                var page_tag = $('<ul class="pagination"><ul>');
+                page_tag.append('<li>\n<a href="#" aria-label="Previous">\n<span aria-hidden="true">&laquo;</span>\n</a>\n</li>'.replace('#',data.previous));
+                for (var page = 0; page < all_page; page++) {
+                    page_tag.append('<li><a href="#url">#</a></li>'.replace('#url','http://192.168.1.170:8888/api/video/?page='+page).replace('#',page))
+
+                }
+                page_tag.append('<li>\n<a href="#" aria-label="Next">\n<span aria-hidden="true">&raquo;</span>\n</a>\n</li>'.replace('#',data.next));
+                $("#page_list").append(page_tag);
             }
         )
     </script>

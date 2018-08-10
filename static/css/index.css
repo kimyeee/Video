@@ -40,6 +40,10 @@ a:hover {
     max-height: 240px;
 }
 
+.media-left a img {
+    max-height: 360px;
+}
+
 .media-body a {
     font-size: 20px;
 }

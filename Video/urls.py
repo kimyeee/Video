@@ -20,7 +20,7 @@ from video1.views import v_index
 
 urlpatterns = [
     url(r'^api/', include('video1.urls')),
-    url(r'home', home),
+    url(r'movie', home),
     url(r'video_detail/(.+)/$', detail),
     url(r'video_play/(.+)/$', video_play),
     url(r'search', search),
