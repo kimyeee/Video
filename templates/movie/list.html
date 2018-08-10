@@ -98,7 +98,7 @@
                 for (var i = 0; i < data.length; i++) {
                     console.log(data[i]);
                     var tag = $('<div class="media"></div>');
-                    tag.append('<div class="media-left media-middle"><img src="#cover" width="280px" height="360px"></div>'.replace('#cover', data[i].cover));
+                    tag.append('<div class="media-left media-middle"><a href="/video_detail/'+data[i].id+'"><img src="#cover" width="280px" height="360px"></a></div>'.replace('#cover', data[i].cover));
                     tag.append('<div class="media-body"><a href="/video_detail/'+data[i].id+'" style="font-size: 25px">'+data[i].name+'</a>' +
                         '<div class="media-heading">简介 : '+data[i].summarize+'</div></div>' );
                     $("#mm").append(tag);

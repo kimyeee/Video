@@ -41,7 +41,7 @@ def search(request):
 
 def detail(request, id):
     video = Video.objects.filter(id=id).first()
-    return render(request, 'movie/video_detail.html', {'title': video.name, 'id': id,
+    return render(request, 'movie/video_detail.html', {'title': video.name, 'cover': video.cover, 'id': id,
                                                        'video_url': video.video_url})
 
 
