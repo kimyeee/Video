@@ -47,7 +47,7 @@ def detail(request, id):
 
 def video_play(request, id):
     video = Video.objects.filter(id=id).first()
-    return render(request, 'movie/video_play.html', {'title': video.name, 'id': id,
+    return render(request, 'movie/play.html', {'title': video.name, 'id': id,
                                                      'video_url': video.video_url})
 
 

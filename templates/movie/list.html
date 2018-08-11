@@ -9,7 +9,7 @@
     <div>
         <div class="row11">
             <div class="row" style="min-width: 1000px;margin: 2%">
-                <div id="mm" class="#" style="display:inline-block;margin:0 30px;width:72%;min-width: 72%;float: left">
+                <div id="mm" class="#" style="display:inline-block;margin:0 auto;width:78%;min-width: 78%;float: left">
 
                 </div>
                 <div class="right_c"
@@ -31,7 +31,7 @@
 
                             </div>
                             <div class="media">
-                                <a href="/">我不是药神</a>
+                                <a href="/" onclick="get_video_list()">我不是药神</a>
 
                             </div>
                         </div>
@@ -63,9 +63,9 @@
                 </div>
             </div>
             <nav id="page_list" aria-label="Page navigation" style="margin-right:150px;text-align: center">
-{#                <ul  class="pagination">#}
-{#                    #}
-{#                </ul>#}
+                {#                <ul  class="pagination">#}
+                {#                    #}
+                {#                </ul>#}
             </nav>
         </div>
     </div>
@@ -79,26 +79,51 @@
         $.getJSON(
             "http://192.168.1.170:8888/api/video/",
             function (data) {
-                console.log(data.data.results);
-                data = data.data.results;
-                for (var i = 0; i < data.length; i++) {
-                    console.log(data[i]);
-                    var tag = $('<div class="media"></div>');
-                    tag.append('<div class="media-left media-middle"><a href="/video_detail/'+data[i].id+'"><img src="#cover" width="280px" height="360px"></a></div>'.replace('#cover', data[i].cover));
-                    tag.append('<div class="media-body"><a href="/video_detail/'+data[i].id+'" style="font-size: 25px">'+data[i].name+'</a>' +
-                        '<div class="media-heading">简介 : '+data[i].summarize+'</div></div>' );
+                console.log(data.data);
+                results = data.data.results;
+                for (var i = 0; i < results.length; i++) {
+                    console.log(results[i]);
+                    var tag = $('<div class="item"></div>');
+                    tag.append('<div class="media-left media-middle"><a href="/video_detail/' + results[i].id + '"><img src="#cover" width="250px" height="360px"></a></div>'.replace('#cover', results[i].cover));
+                    tag.append('<div class="media"><div class="media-body"><a href="/video_detail/' + results[i].id + '" style="font-size: 18px">' + results[i].name + '</a></div></div>');
                     $("#mm").append(tag);
                 }
-                var all_page = Math.ceil(data.length /10);
+                var all_page = Math.ceil(results.length / 10);
                 var page_tag = $('<ul class="pagination"><ul>');
-                page_tag.append('<li>\n<a href="#" aria-label="Previous">\n<span aria-hidden="true">&laquo;</span>\n</a>\n</li>'.replace('#',data.previous));
-                for (var page = 0; page < all_page; page++) {
-                    page_tag.append('<li><a href="#url">#</a></li>'.replace('#url','http://192.168.1.170:8888/api/video/?page='+page).replace('#',page))
+                console.log(data.data.previous);
+                console.log(data.data.next);
+                if (data.data.previous) {
+                    page_tag.append('<li>\n<a href="#" onclick="get_video_list(this)" value="#api" aria-label="Previous">\n<span aria-hidden="true">&laquo;</span>\n</a>\n</li>'.replace('#api', data.data.previous));
 
                 }
-                page_tag.append('<li>\n<a href="#" aria-label="Next">\n<span aria-hidden="true">&raquo;</span>\n</a>\n</li>'.replace('#',data.next));
+                for (var page = 0; page < all_page; page++) {
+                    page_tag.append('<li><a href="#" onclick="get_video_list(this)" value="#api">#page</a></li>'.replace('#api', 'http://192.168.1.170:8888/api/video/?page=' + (page + 1)).replace('#page', page + 1))
+
+                }
+                if (data.data.next) {
+
+                    page_tag.append('<li>\n<a href="#" onclick="get_video_list(this)" value="#api" aria-label="Next">\n<span aria-hidden="true">&raquo;</span>\n</a>\n</li>'.replace('#api', data.data.next));
+                }
                 $("#page_list").append(page_tag);
             }
-        )
+        );
+
+        function get_video_list(ths) {
+            console.log(ths.getAttribute('value'));
+            $("#mm").empty();
+
+            $.getJSON(
+                ths.getAttribute('value'),
+                function (data) {
+                    results = data.data.results;
+                    for (var i = 0; i < results.length; i++) {
+                        console.log(results[i]);
+                        var tag = $('<div class="item"></div>');
+                        tag.append('<div class="media-left media-middle"><a href="/video_detail/' + results[i].id + '"><img src="#cover" width="250px" height="360px"></a></div>'.replace('#cover', results[i].cover));
+                        tag.append('<div class="media"><div class="media-body"><a href="/video_detail/' + results[i].id + '" style="font-size: 18px">' + results[i].name + '</a></div></div>');
+                        $("#mm").append(tag);
+                    }
+                })
+        }
     </script>
 {% endblock %}
