@@ -13,7 +13,11 @@
 <body>
 
 {% include "movie/menu.html" %}
-
+ <script type="text/javascript">
+    if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+        window.location.href="/m_index"
+    }
+</script>
 {% block content %}
 
 {% endblock %}

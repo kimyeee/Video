@@ -29,6 +29,9 @@ def index(request):
 def home(request):
     return render(request, 'movie/list.html')
 
+def moble(request):
+    return render(request, 'movie/moble.html')
+
 
 def video_filter(request):
     return render(request, 'filter.html')
