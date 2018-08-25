@@ -1,19 +1,7 @@
 import requests
-import time
-
 import sys
 
-headers = {
-    'Host': 'bdmov.a.yximgs.com',
-    'Connection': 'keep - alive',
-    'Cache-Control': 'max - age = 0',
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla / 5.0(Windows,NT10.0;Win64;x64) AppleWebKit / 537.36(KHTML, likeGecko) Chrome / 66.0.3359.181Safari / 537.36',
-    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-    'Accept-Encoding': 'gzip,deflate',
-    'Accept-Language': 'zh-CN,zh;q=0.9',
-}
-file = open('kuai.txt', 'rb').readlines()
+file = open('video.txt', 'rb').readlines()
 a, c = 0, 0
 f = open('error.txt', 'w')
 sum_count = len(file)
@@ -30,12 +18,11 @@ for txt in file:
             continue
         if video_name == '...' or not video_name:
             video_name = '没有名字' + str(a)
-        # res = requests.get(video_url)
-        # open(r'G:\video' + '\\' + video_name + '.mp4', 'wb').write(res.content + b'####&&&&')
+        res = requests.get(video_url)
+        open(video_name + '.mp4', 'wb').write(res.content + b'####&&&&')
         progress = int(a / sum_count * 100)
         print('\r数量: %s/%s \t进度:%s  %s%%' % (a, sum_count, '#' * progress + ' ' * (100 - progress), progress), end='',
               file=sys.stdout, flush=True)
     except Exception as e:
-        print(e)
         f.write('error----%s----%s----%s\r' % (str(a), video_name, video_url))
         continue
