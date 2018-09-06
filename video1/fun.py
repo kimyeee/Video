@@ -37,12 +37,12 @@ def post(c):
     while 1:
         # s_headers = headers1.update(dict(headers))
         # print(cc)
-        try:
-            random_qq = random.randrange(11111111, 99999999)
+        # try:
+            # random_qq = random.randrange(11111111, 99999999)
             # res = requests.post('http://wwb.faxya.cn/ajax.php?act=inviteurl', data={'userqq': str(random_qq)}, )
-            requests.get('https://api.hongyuqkl.com/public/index/images/i_s.png')
-        except Exception as e:
-            continue
+            requests.get('http://shell.chinasummer.org')
+        # except Exception as e:
+        #     continue
 
 l = range(999999)
 pool = threadpool.ThreadPool(555)

@@ -47,9 +47,11 @@ def post(c):
         c += 1
         print(c)
         try:
-            res = requests.post('http://www.admin333.com/shop-2018980317.html', headers=headers1, data=data,
-                                proxies=proxie)
+            # res = requests.post('http://www.admin333.com/shop-2018980317.html', headers=headers1, data=data,
+            #                     proxies=proxie)
             a = 0
+            requests.get('https://fxd2.pahys.com/health-circle/index.html?channel=weixin&source=pajk&business=friends&position=text_link&userId=43732400509#/share/2683069')
+
         except Exception as e:
             continue
 
