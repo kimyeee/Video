@@ -10,29 +10,40 @@ headers = {
     'Referer': 'https://my.fastcomet.com/domainchecker.php?search=single&type=first&domain=880ys',
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
 }
-registered_list = []
-unregistered_list = []
-for i in range(130000, 140000):
-    domain = str(i) + '.com'
-    res = requests.get(url % str(domain))
-    soup = bs4.BeautifulSoup(res.content)
-    if soup.find('returncode').text == '200':
-        if soup.find('original').text[0:3] == '210':
-            unregistered_list.append(domain)
-        #     print('__未注册__')
-        # else:
-        #     registered_list.append(domain)
-        # print(domain)
 
-with open('unregistered2.txt', 'a') as f:
-    c = 0
-    for d in unregistered_list:
-        if c % 5 == 0:
-            f.write('\n')
-        f.write(d + '\t')
-        c += 1
 
-print('已注册：')
-print(registered_list)
-print('未注册：')
-print(unregistered_list)
+def check_domain(s, e):
+    unregistered_list = []
+    for i in range(s, e):
+        try:
+            domain = str(i) + '.com'
+            res = requests.get(url % str(domain))
+            soup = bs4.BeautifulSoup(res.content)
+            if soup.find('returncode').text == '200':
+                if soup.find('original').text[0:3] == '210':
+                    unregistered_list.append(domain)
+                print(domain)
+            time.sleep(0.1)
+        except:
+            time.sleep(10)
+    return unregistered_list
+
+
+def save(unregistered_list):
+    print(unregistered_list)
+    with open('unregistered3.txt', 'a') as f:
+        c = 0
+        for d in unregistered_list:
+            if c % 5 == 0:
+                f.write('\n')
+            f.write(d + '\t')
+            c += 1
+
+
+if __name__ == '__main__':
+    c = 1000
+    for i in range(80, 90):
+        s = c * i
+        e = s + c
+        unregistered_list = check_domain(s, e)
+        save(unregistered_list)
