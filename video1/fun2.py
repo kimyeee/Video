@@ -39,7 +39,7 @@ proxie = {
 }
 
 cc = 1
-res = requests.post('http://www.admin333.com/shop-2018980317.html', headers=headers1, data=data, proxies=proxie)
+# res = requests.post('http://www.admin333.com/shop-2018980317.html', headers=headers1, data=data, proxies=proxie)
 
 
 def post(c):
@@ -50,16 +50,18 @@ def post(c):
             # res = requests.post('http://www.admin333.com/shop-2018980317.html', headers=headers1, data=data,
             #                     proxies=proxie)
             a = 0
-            requests.get('https://fxd2.pahys.com/health-circle/index.html?channel=weixin&source=pajk&business=friends&position=text_link&userId=43732400509#/share/2683069')
+            res = requests.get('http://aaamovie.online/')
+            print(res.text)
 
         except Exception as e:
             continue
 
 
-# l = range(999999)
-# pool = threadpool.ThreadPool(555)
-# tasks = threadpool.makeRequests(post, list(l))
-# for task in tasks:
-#     pool.putRequest(task)
-# pool.wait()
+l = range(999999)
+pool = threadpool.ThreadPool(
+    55)
+tasks = threadpool.makeRequests(post, list(l))
+for task in tasks:
+    pool.putRequest(task)
+pool.wait()
 post(0)

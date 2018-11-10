@@ -4,6 +4,7 @@ from django.shortcuts import render, HttpResponse
 # Create your views here.
 from rest_framework import mixins, viewsets
 
+from Video.settings import DOMAIN
 from permissions.base_permissions import BaseOperatePermission
 from video1.models import Video
 from video1.serializers import VideoSerializer
@@ -27,7 +28,8 @@ def index(request):
 
 
 def home(request):
-    return render(request, 'movie/list.html')
+    return render(request, 'movie/list.html', {'domain': DOMAIN})
+
 
 def moble(request):
     return render(request, 'movie/moble.html')
@@ -51,7 +53,7 @@ def detail(request, id):
 def video_play(request, id):
     video = Video.objects.filter(id=id).first()
     return render(request, 'movie/play.html', {'title': video.name, 'id': id,
-                                                     'video_url': video.video_url})
+                                               'video_url': video.video_url})
 
 
 class IndexViewSet(mixins.CreateModelMixin,

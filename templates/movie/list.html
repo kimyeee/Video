@@ -77,7 +77,7 @@
     <script type="text/javascript">
         console.log(1);
         $.getJSON(
-            "http://192.168.1.170:8888/api/video/",
+            "{{ domain }}/api/video/",
             function (data) {
                 console.log(data.data);
                 results = data.data.results;
@@ -97,7 +97,7 @@
 
                 }
                 for (var page = 0; page < all_page; page++) {
-                    page_tag.append('<li><a href="#" onclick="get_video_list(this)" value="#api">#page</a></li>'.replace('#api', 'http://192.168.1.170:8888/api/video/?page=' + (page + 1)).replace('#page', page + 1))
+                    page_tag.append('<li><a href="#" onclick="get_video_list(this)" value="#api">#page</a></li>'.replace('#api', '{{ domain }}/api/video/?page=' + (page + 1)).replace('#page', page + 1))
 
                 }
                 if (data.data.next) {

@@ -1,3 +1,5 @@
+import random
+
 import requests
 import time, bs4
 
@@ -17,13 +19,13 @@ def check_domain(s, e):
     for i in range(s, e):
         try:
             domain = str(i) + '.com'
+            domain = ''.join(random.sample('qwertyuioplkjhgfdsazxcvbnm', 4))
             res = requests.get(url % str(domain))
             soup = bs4.BeautifulSoup(res.content)
             if soup.find('returncode').text == '200':
                 if soup.find('original').text[0:3] == '210':
                     unregistered_list.append(domain)
                 print(domain)
-            time.sleep(0.1)
         except:
             time.sleep(10)
     return unregistered_list
@@ -31,7 +33,7 @@ def check_domain(s, e):
 
 def save(unregistered_list):
     print(unregistered_list)
-    with open('unregistered3.txt', 'a') as f:
+    with open('unregistered4.txt', 'a') as f:
         c = 0
         for d in unregistered_list:
             if c % 5 == 0:
