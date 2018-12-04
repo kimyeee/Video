@@ -6,12 +6,16 @@ import sys
 
 print("""请输入域名或IP，端口默认80( https 可输入443 )\n例:\tbaidu.com 443\n\tbaidu.com\n请勿加 http://""")
 argv = sys.argv
+print(argv)
 if len(argv) == 2:
-    host = argv[-2]
-    if len(argv) == 3:
-        port = argv[-1]
-    else:
-        port = 80
+    host = argv[1]
+    port = 80
+elif len(argv) == 3:
+    host = argv[1]
+    port = argv[2]
+    if not port.isdigit():
+        raise ValueError('参数错误')
+    port = int(port)
 else:
     raise ValueError('缺少域名/IP参数')
 
@@ -20,7 +24,7 @@ PORT = port
 HOST = host
 if HOST[-1] == '/':
     HOST = HOST[:-1]
-PAGE = "/"
+PAGE = "/api/v1"
 # ---------------------------
 buf = ("POST %s HTTP/1.1\r\n"
        "Host: %s\r\n"

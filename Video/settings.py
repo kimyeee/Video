@@ -172,7 +172,7 @@ if not os.path.isdir(LOG_ROOT):
 # }
 
 # DOMAIN = 'http://www.aaamovie.online'
-DOMAIN = 'http://vi.3w.dkys.org'
+DOMAIN = 'http://192.168.10.157'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
