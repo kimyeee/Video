@@ -1,7 +1,7 @@
 import time
 from celery import Celery
 
-app = Celery('tasks', backend='amqp://guest@localhost', broker='amqp://guest@localhost//')
+app = Celery('tasks', backend='redis://localhost', broker='amqp://guest@localhost//')
 
 
 @app.task
