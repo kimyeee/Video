@@ -1,0 +1,2 @@
+b = b'\xD6\xD0\xB9\xFA\xB1\xEA'
+print(b.decode('gbk'))
