@@ -34,7 +34,7 @@ class Lagou(Base):
     home_page = Column(String(64))
     company_labels = Column(String(64))
 
-import mysqlconnector
+
 engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/test", max_overflow=5)
 Session = sessionmaker(bind=engine)
 session = Session()
