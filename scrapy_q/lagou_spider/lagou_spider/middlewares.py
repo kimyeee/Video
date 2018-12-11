@@ -4,7 +4,7 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-
+import time
 from scrapy import signals
 
 import random
@@ -28,6 +28,12 @@ class UserAgentMiddleware(object):
 
     def process_request(self, request, spider):
         request.headers['USER_AGENT'] = random.choice(self.user_agent_list)
+        '''对request对象加上proxy'''
+        # proxy = self.get_random_proxy()
+        # print("this is request ip:" + proxy)
+        time.sleep(1)
+        request.meta['proxy'] = 'http://127.0.0.1:8888'
+
         print('agent')
 
 
