@@ -1,5 +1,15 @@
-s='https://www.lagou.com/jobs/4987489.html'
+class A:
+    name = 'a'
 
-print(s.rsplit('/')[-1][:-5])
+    def __init__(self):
+        self.n = 2
 
 
+a = A()
+b = A()
+A.name = 2
+a.n = 2
+print(a.name)
+print(a.n)
+print(b.name)
+print(b.n)
