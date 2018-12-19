@@ -35,6 +35,13 @@ class Lagou(Base):
     company_labels = Column(String(64))
 
 
+class Comment(Base):
+    # 表的名字:
+    __tablename__ = 'comment'
+
+    id = Column(Integer(), primary_key=True)
+    content = Column(String(1024))
+
 # engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/test", max_overflow=5)
 # Session = sessionmaker(bind=engine)
 # session = Session()
@@ -42,4 +49,3 @@ class Lagou(Base):
 # session.add(obj)
 # session.commit()
 # session.close()
-
