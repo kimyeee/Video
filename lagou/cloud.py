@@ -1,13 +1,11 @@
-import wordcloud
+import random
+from PIL import Image
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
-import pickle
+import numpy as np
 from os import path
-import jieba
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator, random_color_func
 from lagou.models import Comment
 
 engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/test", max_overflow=5)
@@ -19,29 +17,27 @@ comments = session.query(Comment)
 for comment in comments:
     text += comment.content
 
-# with open('人工智能及应用.txt', 'r', encoding='utf8') as fin:
-#     for line in fin.readlines():
-#         line = line.strip('\n')
-# # sep’.join（seq）以sep作为分隔符，将seq所有的元素合并成一个新的字符串
-#         text += ' '.join(jieba.cut(line))
-backgroud_Image = plt.imread('test.png')
+backgroud_Image = plt.imread('test2.png')
+alice_mask = np.array(Image.open('test2.png'))
 print('加载图片成功！')
 '''设置词云样式'''
 wc = WordCloud(
     background_color='white',  # 设置背景颜色
-    mask=backgroud_Image,  # 设置背景图片
-    font_path='C:\Windows\Fonts\YuGothM.ttc',  # 若是有中文的话，这句代码必须添加，不然会出现方框，不出现汉字
-    max_words=2000,  # 设置最大现实的字数
+    mask=alice_mask,  # 设置背景图片
+    prefer_horizontal=0.6,  # 将词横放
+    # color_func=lambda *args, **kwargs: (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)),
+    font_path='C:\Windows\Fonts\simsun.ttc',  # 若是有中文的话，这句代码必须添加，不然会出现方框，不出现汉字
+    max_words=200,  # 设置最大现实的字数
     stopwords=STOPWORDS,  # 设置停用词
-    max_font_size=150,  # 设置字体最大值
-    random_state=30  # 设置有多少种随机生成状态，即有多少种配色方案
+    max_font_size=60,  # 设置字体最大值
+    random_state=3  # 设置有多少种随机生成状态，即有多少种配色方案
 )
 wc.generate_from_text(text)
 print('开始加载文本')
 # 改变字体颜色
 img_colors = ImageColorGenerator(backgroud_Image)
 # 字体颜色为背景图片的颜色
-wc.recolor(color_func=img_colors)
+wc.recolor(color_func=random_color_func)
 # 显示词云图
 plt.imshow(wc)
 # 是否显示x轴、y轴下标

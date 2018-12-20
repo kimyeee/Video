@@ -1,15 +1,11 @@
-class A:
-    name = 'a'
-
-    def __init__(self):
-        self.n = 2
+import random
 
 
-a = A()
-b = A()
-A.name = 2
-a.n = 2
-print(a.name)
-print(a.n)
-print(b.name)
-print(b.n)
+def random_color(*args, **kwargs):
+    r = random.randrange(0, 255)
+    g = random.randrange(0, 255)
+    b = random.randrange(0, 255)
+    return (r, g, b)
+
+
+print(random_color())
