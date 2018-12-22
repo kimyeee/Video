@@ -6,19 +6,19 @@ import numpy as np
 from os import path
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator, random_color_func
-from lagou.models import Comment
+from lagou.models import Comment, Lagou
 
 engine = create_engine("mysql+mysqlconnector://root:root@localhost:3306/test", max_overflow=5)
 Session = sessionmaker(bind=engine)
 session = Session()
 text = ''
 
-comments = session.query(Comment)
+comments = session.query(Lagou)
 for comment in comments:
-    text += comment.content
+    text += comment.description
 
-backgroud_Image = plt.imread('test2.png')
-alice_mask = np.array(Image.open('test2.png'))
+backgroud_Image = plt.imread('test.png')
+alice_mask = np.array(Image.open('test.png'))
 print('加载图片成功！')
 '''设置词云样式'''
 wc = WordCloud(
@@ -28,7 +28,7 @@ wc = WordCloud(
     # color_func=lambda *args, **kwargs: (random.randrange(0, 255), random.randrange(0, 255), random.randrange(0, 255)),
     font_path='C:\Windows\Fonts\simsun.ttc',  # 若是有中文的话，这句代码必须添加，不然会出现方框，不出现汉字
     max_words=200,  # 设置最大现实的字数
-    stopwords=STOPWORDS,  # 设置停用词
+    stopwords=set('职位描述岗位职责任职要求岗位要求'),  # 设置停用词
     max_font_size=60,  # 设置字体最大值
     random_state=3  # 设置有多少种随机生成状态，即有多少种配色方案
 )
