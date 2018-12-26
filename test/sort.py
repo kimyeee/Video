@@ -4,34 +4,30 @@ import time
 
 
 def bubble_sort(l):
-    print(l)
+    # print(l)
     for c in range(len(l)):
         count = 0
         for i in range(len(l) - c - 1):
             if l[i] > l[i + 1]:
                 l[i], l[i + 1] = l[i + 1], l[i]
                 count += 1
-        print(c, count, l)
+        # print(c, count, l)
         if count == 0:
             return l
     return l
 
 
 def insert_sort(l):
-    el = [l[0]]
-    for i in l[1:]:
-        tag = False
-        # t = i
-        for e in range(1, len(l)):
-            if i >= el[e]:
-                t = el[e + 1]
-                el[e + 1] = i
+    for i in range(1, len(l)):
+        tmp = l[i]
+        t = i - 1
+        while t >= 0 and tmp < l[t]:
+            l[t + 1] = l[t]
+            t -= 1
+        l[t + 1] = tmp
+        # print(l)
 
-            else:
-                t = i
-        print(el)
-
-    return el
+    return l
 
 
 def quick_sort(l):
@@ -80,23 +76,22 @@ def inertsort(l):
             b = b - 1
         l[a] = n
 
+
 def select_sort(l):
     return
 
 
 if __name__ == '__main__':
-    l = [i for i in range(60)]
+    l = [i for i in range(6000)]
     random.shuffle(l)
     print(l)
     st = time.time()
 
     # sort_l = bubble_sort(l)
-    # sort_l = quick_sort(l + l)
+    sort_l = quick_sort(l + l)
     # sort_l = insert_sort(l)
-    sort_l = inertsort([3,4,5,5,2,1])
+    # sort_l = insert_sort(l)
     # sort_l = walk(4)
 
     print(sort_l)
     print(time.time() - st)
-
-
